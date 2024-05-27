@@ -1,0 +1,19 @@
+services:
+  client:
+    build: ./ClientPackage
+    ports:
+      - "80:80"
+    volumes:
+      - volume1:/app
+    depends_on:
+      - server
+
+  server:
+    build: ./ServerPackage
+    ports:
+      - "8080:8080"
+    volumes:
+      - volume2:/app
+volumes:
+    volume1:
+    volume2:
