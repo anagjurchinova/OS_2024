@@ -1,0 +1,5 @@
+FROM eclipse-temurin
+WORKDIR /app
+COPY TCPClient.java .
+RUN javac TCPClient.java 
+CMD ["java", "TCPClient"]

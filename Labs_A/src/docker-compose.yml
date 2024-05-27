@@ -1,0 +1,52 @@
+services:
+  tcp-server:
+    build:
+      context: C:\Users\ANA\Desktop\os_exercises\Labs_A\src\TCP
+      dockerfile: Dockerfile-TCPServer
+    ports:
+      - "8080:8080/tcp"
+    networks:
+      - tcp-network
+    deploy:
+      replicas: 1
+
+  tcp-client:
+    build:
+      context: C:\Users\ANA\Desktop\os_exercises\Labs_A\src\TCP
+      dockerfile: Dockerfile-TCPClient
+    ports:
+      - "8081:8081/tcp"
+    networks:
+      - tcp-network
+    deploy:
+      replicas: 5
+    depends_on:
+      - tcp-server
+
+  udp-server:
+    build:
+      context: C:\Users\ANA\Desktop\os_exercises\Labs_A\src\UDP
+      dockerfile: Dockerfile-UDPServer
+    ports:
+      - "80:80/udp"
+    networks:
+      - udp-network
+    deploy:
+      replicas: 1
+
+  udp-client:
+    build:
+      context: C:\Users\ANA\Desktop\os_exercises\Labs_A\src\UDP
+      dockerfile: Dockerfile-UDPClient
+    ports:
+      - "81:81/udp"
+    networks:
+      - udp-network
+    deploy:
+      replicas: 1
+
+networks:
+  udp-network:
+    driver: bridge
+  tcp-network:
+    driver: bridge
